@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
 /* Print the stack for debugging */
 void	print_stack(t_stack *stack, char *name)
@@ -45,7 +45,7 @@ int	process_instructions_debug(t_stack **stack_a, t_stack **stack_b)
 			free(instruction);
 			return (0);
 		}
-		free(instruction);  // Free the instruction here
+		free(instruction);
 		print_stack(*stack_a, "stack_a");
 		print_stack(*stack_b, "stack_b");
 		instruction = get_next_line(0);

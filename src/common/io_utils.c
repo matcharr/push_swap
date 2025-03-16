@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_utils.c                                    :+:      :+:    :+:   */
+/*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mathis <mathis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,60 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
-/* String length */
-size_t	ft_strlen(const char *s)
+/* Write string to file descriptor */
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-/* String copy */
-char	*ft_strcpy(char *dest, const char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
+	if (!s)
+		return ;
+	while (*s)
 	{
-		dest[i] = src[i];
-		i++;
+		write(fd, s, 1);
+		s++;
 	}
-	dest[i] = '\0';
-	return (dest);
 }
 
-/* String concatenation */
-char	*ft_strcat(char *dest, const char *src)
+/* Convert integer to string and write to file descriptor */
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
-	int	j;
+	char	c;
 
-	i = 0;
-	while (dest[i])
-		i++;
-	j = 0;
-	while (src[j])
+	if (n == -2147483648)
 	{
-		dest[i + j] = src[j];
-		j++;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
-	dest[i + j] = '\0';
-	return (dest);
-}
-
-/* String comparison */
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	c = (n % 10) + '0';
+	write(fd, &c, 1);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
 /* Process a single argument and add it to the stack */
 static int	process_argument(t_stack **stack, char *arg)

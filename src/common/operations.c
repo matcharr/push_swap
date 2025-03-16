@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
 /* Swap the first 2 elements at the top of stack a */
 void	sa(t_stack **stack_a, int print)

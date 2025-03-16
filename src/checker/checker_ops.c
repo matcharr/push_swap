@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   checker_ops.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathis <mathis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023-11-15 10:00:00 by mathis            #+#    #+#             */
-/*   Updated: 2023-11-15 10:00:00 by mathis           ###   ########.fr       */
+/*   Created: 2025/03/16 22:12:09 by marvin            #+#    #+#             */
+/*   Updated: 2025/03/16 22:12:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
-/* Execute swap and push operations */
 int	execute_swap_push(t_stack **stack_a, t_stack **stack_b, char *instruction)
 {
 	if (!ft_strcmp(instruction, "sa"))
@@ -30,7 +29,6 @@ int	execute_swap_push(t_stack **stack_a, t_stack **stack_b, char *instruction)
 	return (1);
 }
 
-/* Execute rotate operations */
 int	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *instruction)
 {
 	if (!ft_strcmp(instruction, "ra"))
@@ -50,17 +48,8 @@ int	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *instruction)
 	return (1);
 }
 
-/* Execute the operation based on the instruction */
-int	execute_operation(t_stack **stack_a, t_stack **stack_b, char *instruction)
-{
-	if (execute_swap_push(stack_a, stack_b, instruction))
-		return (1);
-	if (execute_rotate(stack_a, stack_b, instruction))
-		return (1);
-	return (0);
-}
-
-int	process_single_instruction(t_stack **stack_a, t_stack **stack_b, char *instruction)
+int	process_single_instruction(t_stack **stack_a, t_stack **stack_b,
+			char *instruction)
 {
 	int	len;
 	int	result;
@@ -68,21 +57,8 @@ int	process_single_instruction(t_stack **stack_a, t_stack **stack_b, char *instr
 	len = ft_strlen(instruction);
 	if (len > 0 && instruction[len - 1] == '\n')
 		instruction[len - 1] = '\0';
-
-	// Debug output
-	write(1, "Processing instruction: ", 24);
-	write(1, instruction, ft_strlen(instruction));
-	write(1, "\n", 1);
-
 	result = execute_swap_push(stack_a, stack_b, instruction);
 	if (result == 0)
 		result = execute_rotate(stack_a, stack_b, instruction);
-
-	// Debug output
-	if (result)
-		write(1, "Instruction executed successfully\n", 33);
-	else
-		write(1, "Invalid instruction\n", 20);
-
 	return (result);
 }

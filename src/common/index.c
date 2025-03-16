@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../include/push_swap.h"
 
 /* Find the minimum unindexed value in the stack */
 int	find_min_unindexed(t_stack *stack)
